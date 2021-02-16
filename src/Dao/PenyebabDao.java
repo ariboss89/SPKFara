@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +23,80 @@ public class PenyebabDao {
     private Statement st;
     private ResultSet res;
     private String query;
+    
+    public String IdPenyebab() {
+        
+        String idPenyebab = "";
+        
+        con = new Koneksi();
+        try {
+            
+            st = con.connect().createStatement();
+            res = st.executeQuery("SELECT *FROM tb_penyebab ORDER BY Id DESC");
+            if (res.first() == false) {
+                idPenyebab=("P01");
+            } else {
+                res.first();
+                System.out.println("COT: " + res.getString("Id").substring(1, 3));
+                int nokirim = Integer.valueOf(res.getString("Id").substring(1, 3)) + 1;
+                System.out.println(nokirim);
+                if (nokirim < 10) {
+                    idPenyebab=("P0" + nokirim);
+                } else if (nokirim >= 10 && nokirim < 100) {
+                    idPenyebab=("P" + nokirim);
+                } 
+            }
+            res.close();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Data tidak ditemukan");
+        }
+        
+        return idPenyebab;
+    }
+    
+    public void Save(String Id, String nama) {
+        con = new Koneksi();
+        con.connect();
+        try {
+            st = con.conn.createStatement();
+            query = "insert into tb_penyebab(Id, nama)values('" + Id + "','" + nama + "')";
+            st.executeUpdate(query);
+            st.close();
+            con.conn.close();
+            //JOptionPane.showMessageDialog(null, "");
+        } catch (SQLException e) {
+        }
+    }
+
+    public void Update(String Id, String nama) {
+        con = new Koneksi();
+        con.connect();
+        try {
+            st = con.conn.createStatement();
+            query = "update tb_penyebab set nama ='" + nama + "' where Id = '" + Id + "'";
+            st.executeUpdate(query);
+            st.close();
+            con.conn.close();
+            JOptionPane.showMessageDialog(null, "Data Berhasil di Update");
+        } catch (SQLException e) {
+
+        }
+    }
+
+    public void Delete(String Id) {
+        con = new Koneksi();
+        con.connect();
+        try {
+            st = con.conn.createStatement();
+            query = "delete from tb_penyebab where Id = '" + Id + "'";
+            st.executeUpdate(query);
+            st.close();
+            con.conn.close();
+            JOptionPane.showMessageDialog(null, "Data di Hapus");
+        } catch (SQLException e) {
+
+        }
+    }
     
     public String[][] Show() {
 
@@ -44,14 +119,13 @@ public class PenyebabDao {
             while (res.next()) {
                 data[r][0] = res.getString("Id");
                 data[r][1] = res.getString("nama");
-                data[r][2] = res.getString("kode");
                 r++;
             }
             int jmlBaris = r;
             String[][] tmpArray = data;
-            data = new String[jmlBaris][3];
+            data = new String[jmlBaris][2];
             for (r = 0; r < jmlBaris; r++) {
-                for (int c = 0; c < 3; c++) {
+                for (int c = 0; c < 2; c++) {
                     data[r][c] = tmpArray[r][c];
                 }
             }

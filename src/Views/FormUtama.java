@@ -23,6 +23,7 @@ public class FormUtama extends javax.swing.JFrame {
         menu_utama.setVisible(false);
         menu_deteksi.setVisible(true);
         menu_logout.setVisible(false);
+        menuRules.setVisible(false);
         menu_exit.setVisible(true);
     }
 
@@ -42,6 +43,7 @@ public class FormUtama extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        menuRules = new javax.swing.JMenuItem();
         menu_deteksi = new javax.swing.JMenu();
         menu_exit = new javax.swing.JMenu();
         menu_logout = new javax.swing.JMenu();
@@ -100,6 +102,14 @@ public class FormUtama extends javax.swing.JFrame {
             }
         });
         menu_utama.add(jMenuItem4);
+
+        menuRules.setText("RULES");
+        menuRules.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRulesActionPerformed(evt);
+            }
+        });
+        menu_utama.add(menuRules);
 
         jMenuBar1.add(menu_utama);
 
@@ -181,6 +191,7 @@ public class FormUtama extends javax.swing.JFrame {
         String username = tb_admin.getUsername();
 
         if (username != null) {
+            menuRules.setVisible(true);
             menu_login.setVisible(false);
             menu_utama.setVisible(true);
             menu_deteksi.setVisible(false);
@@ -202,6 +213,11 @@ public class FormUtama extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "SAMPAI JUMPA LAGI !!");
         }
     }//GEN-LAST:event_menu_logoutMouseClicked
+
+    private void menuRulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRulesActionPerformed
+        // TODO add your handling code here:
+        new FormRules().show();
+    }//GEN-LAST:event_menuRulesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,6 +260,7 @@ public class FormUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem menuRules;
     private javax.swing.JMenu menu_deteksi;
     private javax.swing.JMenu menu_exit;
     private javax.swing.JMenu menu_login;

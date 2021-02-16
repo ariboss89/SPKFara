@@ -6,6 +6,7 @@
 package Views;
 
 import Dao.ReportDao;
+import Models.tb_formula;
 import Models.tb_pelanggan;
 import javax.swing.JOptionPane;
 

@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.8)
-# Date: 2020-10-12 14:00:06
+# Date: 2021-02-17 00:21:04
 # Generator: MySQL-Front 5.3  (Build 4.81)
 
 /*!40101 SET NAMES utf8 */;
@@ -28,19 +28,18 @@ INSERT INTO `tb_admin` VALUES ('fara123','1234567');
 DROP TABLE IF EXISTS `tb_deteksi`;
 CREATE TABLE `tb_deteksi` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `idriwayat` varchar(255) DEFAULT NULL,
+  `id_riwayat` varchar(255) DEFAULT NULL,
   `kode` varchar(255) DEFAULT NULL,
   `gejala` varchar(255) DEFAULT NULL,
-  `jawaban` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 #
 # Data for table "tb_deteksi"
 #
 
 /*!40000 ALTER TABLE `tb_deteksi` DISABLE KEYS */;
-INSERT INTO `tb_deteksi` VALUES (73,'R001','G001','Lampu Padam','YA'),(74,'R001','G002','Lampu Menyala','YA'),(75,'R001','G003','Lampu Berkedip','YA'),(76,'R001','G004','Kwh Tersambar Petir','YA'),(77,'R001','G008','Pelanggan Tidak Bisa Input Pulsa di KWH','YA'),(78,'R001','G012','Tombol Kwh Tidak Bisa diTekan','YA'),(79,'R001','G014','Voltase Naik Turun','YA'),(80,'R001','G015','Muncul Angka Tak Beraturan','YA'),(81,'R001','G016','Muncul Tulisan Error','YA'),(82,'R001','G017','Layar Display Blank','YA'),(83,'R001','G018','Pulsa Boros','YA'),(84,'R001','G019','Pulsa Tertera Minus','YA'),(85,'R002','G001','Lampu Padam','YA'),(86,'R002','G002','Lampu Menyala','YA'),(87,'R002','G003','Lampu Berkedip','TIDAK'),(88,'R002','G004','Kwh Tersambar Petir','YA'),(89,'R002','G008','Pelanggan Tidak Bisa Input Pulsa di KWH','YA'),(90,'R002','G009','Muncul Gambar Telapak Tangan','YA'),(91,'R002','G010','Muncul Tulisan Periksa','YA'),(92,'R002','G011','Terdengar Bunyi Seperti Alarm di KWH','YA'),(93,'R002','G023','Muncul Gambar Benang Putus','YA'),(94,'R002','G027','Relay Terputus','YA'),(95,'R002','G029','Instalasi Pelanggan Bermasalah','YA');
+INSERT INTO `tb_deteksi` VALUES (20,'R012','G001','Lampu Padam'),(21,'R012','G004','Kwh Tersambar Petir'),(22,'R012','G005','Atap Rumah Nyetrum'),(23,'R012','G006','Lantai Rumah Panas'),(24,'R012','G009','Muncul Gambar Telapak Tangan'),(25,'R012','G012','Tombol Kwh Tidak Bisa diTekan'),(26,'R012','G019','Pulsa Tertera Minus'),(27,'R012','G017','Layar Display Blank'),(28,'R012','G025','Kehilangan Supply 220V'),(30,'R012','G008','Pelanggan Tidak Bisa Input Pulsa di KWH'),(31,'R012','G028','Muncul Tulisan Daya Lebih');
 /*!40000 ALTER TABLE `tb_deteksi` ENABLE KEYS */;
 
 #
@@ -81,6 +80,28 @@ CREATE TABLE `tb_kerusakan` (
 INSERT INTO `tb_kerusakan` VALUES ('K01','Gangguan dan Kerusakan pada Instalasi Pelanggan'),('K02','Gangguan Umum Pada Kwh Meter'),('K03','Gangguan Pada Kabel SR/TR');
 
 #
+# Structure for table "tb_pengetahuan"
+#
+
+DROP TABLE IF EXISTS `tb_pengetahuan`;
+CREATE TABLE `tb_pengetahuan` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_gejala` varchar(255) DEFAULT NULL,
+  `nama_gejala` varchar(255) DEFAULT NULL,
+  `kode_penyebab` varchar(255) DEFAULT NULL,
+  `nama_penyebab` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+#
+# Data for table "tb_pengetahuan"
+#
+
+/*!40000 ALTER TABLE `tb_pengetahuan` DISABLE KEYS */;
+INSERT INTO `tb_pengetahuan` VALUES (1,'G001','Lampu Padam','P01','Instalasi Pelanggan Shot'),(2,'G004','Kwh Tersambar Petir','P01','Instalasi Pelanggan Shot'),(3,'G005','Atap Rumah Nyetrum','P01','Instalasi Pelanggan Shot'),(4,'G006','Lantai Rumah Panas','P01','Instalasi Pelanggan Shot'),(5,'G008','Pelanggan Tidak Bisa Input Pulsa di KWH','P01','Instalasi Pelanggan Shot'),(6,'G009','Muncul Gambar Telapak Tangan','P01','Instalasi Pelanggan Shot'),(7,'G012','Tombol Kwh Tidak Bisa diTekan','P01','Instalasi Pelanggan Shot'),(8,'G017','Layar Display Blank','P01','Instalasi Pelanggan Shot'),(9,'G019','Pulsa Tertera Minus','P01','Instalasi Pelanggan Shot'),(10,'G025','Kehilangan Supply 220V','P01','Instalasi Pelanggan Shot'),(11,'G028','Muncul Tulisan Daya Lebih','P01','Instalasi Pelanggan Shot'),(12,'G001','Lampu Padam','P02','Kwh Meter tertera Periksa'),(13,'G002','Lampu Menyala','P02','Kwh Meter tertera Periksa'),(14,'G003','Lampu Berkedip','P02','Kwh Meter tertera Periksa'),(15,'G007','Timbul Percikan Api','P02','Kwh Meter tertera Periksa'),(16,'G008','Pelanggan Tidak Bisa Input Pulsa di KWH','P02','Kwh Meter tertera Periksa'),(17,'G009','Muncul Gambar Telapak Tangan','P02','Kwh Meter tertera Periksa'),(18,'G010','Muncul Tulisan Periksa','P02','Kwh Meter tertera Periksa'),(19,'G022','Mcb Lost / Tidak Bisa Bergerak','P02','Kwh Meter tertera Periksa'),(20,'G026','Mcb App Trip','P02','Kwh Meter tertera Periksa'),(21,'G028','Muncul Tulisan Daya Lebih','P02','Kwh Meter tertera Periksa');
+/*!40000 ALTER TABLE `tb_pengetahuan` ENABLE KEYS */;
+
+#
 # Structure for table "tb_penyebab"
 #
 
@@ -106,10 +127,10 @@ INSERT INTO `tb_penyebab` VALUES ('P01','Instalasi Pelanggan Shot','K01'),('P02'
 
 DROP TABLE IF EXISTS `tb_riwayat`;
 CREATE TABLE `tb_riwayat` (
-  `idriwayat` varchar(20) NOT NULL DEFAULT '',
-  `gejala` int(11) DEFAULT NULL,
+  `id_riwayat` varchar(20) NOT NULL DEFAULT '',
+  `total_gejala` int(11) DEFAULT NULL,
   `solusi` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idriwayat`)
+  PRIMARY KEY (`id_riwayat`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 #
@@ -117,8 +138,29 @@ CREATE TABLE `tb_riwayat` (
 #
 
 /*!40000 ALTER TABLE `tb_riwayat` DISABLE KEYS */;
-INSERT INTO `tb_riwayat` VALUES ('R001',12,'P03'),('R002',11,'P02');
+INSERT INTO `tb_riwayat` VALUES ('R001',12,'P03'),('R002',11,'P02'),('R003',12,'P03'),('R004',12,'P03'),('R005',11,'P08'),('R006',12,'P03'),('R007',11,'P08'),('R008',12,'P03'),('R009',12,'P03'),('R010',11,'P08'),('R011',12,'P03'),('R012',11,'P01');
 /*!40000 ALTER TABLE `tb_riwayat` ENABLE KEYS */;
+
+#
+# Structure for table "tb_rules"
+#
+
+DROP TABLE IF EXISTS `tb_rules`;
+CREATE TABLE `tb_rules` (
+  `kode_rules` varchar(255) NOT NULL DEFAULT '',
+  `ket` varchar(255) DEFAULT NULL,
+  `kode_penyebab` varchar(255) DEFAULT NULL,
+  `nama_penyebab` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`kode_rules`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+#
+# Data for table "tb_rules"
+#
+
+/*!40000 ALTER TABLE `tb_rules` DISABLE KEYS */;
+INSERT INTO `tb_rules` VALUES ('R001','G001, G004, G005, G006, G008, G009, G012, G017, G019, G025, G028, ','P01','Instalasi Pelanggan Shot'),('R002','G001, G002, G003, G007, G008, G009, G010, G022, G026, G028, ','P02','Kwh Meter tertera Periksa');
+/*!40000 ALTER TABLE `tb_rules` ENABLE KEYS */;
 
 #
 # Structure for table "tb_solusi"

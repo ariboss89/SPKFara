@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +23,50 @@ public class SolusiDao {
     private Statement st;
     private ResultSet res;
     private String query;
+    
+    public void Save(String Id, String nama) {
+        con = new Koneksi();
+        con.connect();
+        try {
+            st = con.conn.createStatement();
+            query = "insert into tb_solusi(Id, solusi)values('" + Id + "','" + nama + "')";
+            st.executeUpdate(query);
+            st.close();
+            con.conn.close();
+            //JOptionPane.showMessageDialog(null, "");
+        } catch (SQLException e) {
+        }
+    }
+
+    public void Update(String Id, String nama) {
+        con = new Koneksi();
+        con.connect();
+        try {
+            st = con.conn.createStatement();
+            query = "update tb_solusi set solusi ='" + nama + "' where Id = '" + Id + "'";
+            st.executeUpdate(query);
+            st.close();
+            con.conn.close();
+            JOptionPane.showMessageDialog(null, "Data Berhasil di Update");
+        } catch (SQLException e) {
+
+        }
+    }
+
+    public void Delete(String Id) {
+        con = new Koneksi();
+        con.connect();
+        try {
+            st = con.conn.createStatement();
+            query = "delete from tb_solusi where Id = '" + Id + "'";
+            st.executeUpdate(query);
+            st.close();
+            con.conn.close();
+            JOptionPane.showMessageDialog(null, "Data di Hapus");
+        } catch (SQLException e) {
+
+        }
+    }
     
     public String[][] Show() {
 

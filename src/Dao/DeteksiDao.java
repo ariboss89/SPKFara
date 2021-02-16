@@ -36,12 +36,12 @@ public class DeteksiDao{
         }
     }
     
-    public void SaveRiwayat(String idriwayat, int gejala, String solusi) {
+    public void SaveRiwayat(String idriwayat, int totalgejala, String solusi) {
         con = new Koneksi();
         con.connect();
         try {
             st = con.conn.createStatement();
-            query = "insert into tb_riwayat(idriwayat, gejala, solusi)values('" + idriwayat + "','" + gejala + "','" + solusi + "')";
+            query = "insert into tb_riwayat(id_riwayat, total_gejala, solusi)values('" + idriwayat + "','" + totalgejala + "','" + solusi + "')";
             st.executeUpdate(query);
             st.close();
             con.conn.close();
