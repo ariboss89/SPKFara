@@ -146,7 +146,7 @@ public class FormDataPelanggan extends javax.swing.JFrame {
         if (idmeter == "" || nama == "") {
             JOptionPane.showMessageDialog(null, "Silahkan Isi Idmeter dan Nama Dahulu");
         } else {
-            rpt.CetakLaporan(tb_pelanggan.getIdriwayat(), tb_pelanggan.getSolusi(), idmeter, nama, kerusakan);
+            rpt.CetakLaporan(txtIdRiwayat.getText().trim(), tb_pelanggan.getSolusi(), idmeter, nama, kerusakan);
             dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

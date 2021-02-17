@@ -73,7 +73,7 @@ public class FormDeteksi extends javax.swing.JFrame {
         btnHapus.setEnabled(false);
         btnLanjutkan.setEnabled(true);
         btnCancel.setEnabled(false);
-        tb_pelanggan.setSolusi("");
+        tb_pelanggan.setSolusi("Tidak Ada");
         tb_pelanggan.setIdriwayat("");
     }
 
@@ -197,6 +197,7 @@ public class FormDeteksi extends javax.swing.JFrame {
 
         txtKesimpulan.setEditable(false);
         txtKesimpulan.setColumns(20);
+        txtKesimpulan.setLineWrap(true);
         txtKesimpulan.setRows(5);
         jScrollPane3.setViewportView(txtKesimpulan);
 
