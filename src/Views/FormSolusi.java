@@ -41,6 +41,7 @@ public class FormSolusi extends javax.swing.JFrame {
         int y = (dim.height - getHeight()) / 2;
         setLocation(x, y);
         ShowId();
+        cbKode.setEnabled(false);
     }
 
     private void Refresh(){
@@ -148,7 +149,7 @@ public class FormSolusi extends javax.swing.JFrame {
         });
 
         cbKode.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        cbKode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PILIH" }));
+        cbKode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "KODE SOLUSI" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

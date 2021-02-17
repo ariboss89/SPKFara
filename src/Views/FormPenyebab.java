@@ -32,6 +32,7 @@ public class FormPenyebab extends javax.swing.JFrame {
         int x = (dim.width - getWidth()) / 2;
         int y = (dim.height - getHeight()) / 2;
         setLocation(x, y);
+        Refresh();
     }
 
     private void Refresh(){

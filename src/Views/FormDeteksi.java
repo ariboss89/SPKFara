@@ -73,6 +73,8 @@ public class FormDeteksi extends javax.swing.JFrame {
         btnHapus.setEnabled(false);
         btnLanjutkan.setEnabled(true);
         btnCancel.setEnabled(false);
+        tb_pelanggan.setSolusi("");
+        tb_pelanggan.setIdriwayat("");
     }
 
     private void CheckHasil() {
