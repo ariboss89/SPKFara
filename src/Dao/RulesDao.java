@@ -67,4 +67,18 @@ public class RulesDao extends tb_rules {
         } catch (SQLException e) {
         }
     }
+     
+     public void UpdateRules(String kode, String ket) {
+        con = new Koneksi();
+        con.connect();
+        try {
+            st = con.conn.createStatement();
+            query = "update tb_rules set ket ='" + ket + "' where kode_penyebab = '" + kode + "'";
+            st.executeUpdate(query);
+            st.close();
+            con.conn.close();
+        } catch (SQLException e) {
+
+        }
+    }
 }

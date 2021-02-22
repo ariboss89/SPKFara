@@ -387,7 +387,8 @@ public class FormRules extends javax.swing.JFrame {
                 st = con.connect().createStatement();
                 res = st.executeQuery("SELECT *FROM tb_rules WHERE kode_penyebab = '" + cbKodePenyebab.getSelectedItem().toString() + "'");
                 if (res.next()) {
-                    JOptionPane.showMessageDialog(null, "RULES dengan KODE '" + cbKodePenyebab.getSelectedItem().toString() + "' Telah di Tambahkan !!");
+                    rd.UpdateRules(cbKodePenyebab.getSelectedItem().toString(), ket);
+                    JOptionPane.showMessageDialog(null, "Rules Telah Di Update !!");
 
                 } else {
                     rd.SaveRules(rd.getIdRules(), ket, cbKodePenyebab.getSelectedItem().toString(), rld.getNama_penyebab());
