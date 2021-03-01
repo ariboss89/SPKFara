@@ -11,6 +11,7 @@ import Dao.RulesDao;
 import Models.tb_model;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,6 +37,11 @@ public class FormRules extends javax.swing.JFrame {
     String[] namaKolom = {"Id", "Kode Gejala", "Nama Gejala", "Kode Penyebab", "Nama Penyebab"};
     int jmlKolom = namaKolom.length;
     int[] lebar = {100, 100, 600, 100, 600};
+    
+    private String rs2[][];
+    String[] namaKolom2 = {"Kode Rules", "Ket", "Kode Penyebab", "Nama Penyebab"};
+    int jmlKolom2 = namaKolom2.length;
+    int[] lebar2 = {400, 600, 400, 800};
 
     public FormRules() {
         initComponents();
@@ -94,6 +100,7 @@ public class FormRules extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -107,6 +114,9 @@ public class FormRules extends javax.swing.JFrame {
         cbKodePenyebab = new javax.swing.JComboBox();
         btnSave = new javax.swing.JButton();
         btnSelesai = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -114,6 +124,8 @@ public class FormRules extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
@@ -238,7 +250,7 @@ public class FormRules extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
@@ -262,15 +274,61 @@ public class FormRules extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTabbedPane1.addTab("FORM UPDATE RULES", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable2KeyPressed(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable2);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("SHOW RULES", jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -278,7 +336,8 @@ public class FormRules extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:        
-
+        rs2 = rd.Show();
+        tbl.SetTabel(jTable2, rs2, namaKolom2, jmlKolom2, lebar2);
     }//GEN-LAST:event_formWindowActivated
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -389,6 +448,7 @@ public class FormRules extends javax.swing.JFrame {
                 if (res.next()) {
                     rd.UpdateRules(cbKodePenyebab.getSelectedItem().toString(), ket);
                     JOptionPane.showMessageDialog(null, "Rules Telah Di Update !!");
+                    listKet.clear();
 
                 } else {
                     rd.SaveRules(rd.getIdRules(), ket, cbKodePenyebab.getSelectedItem().toString(), rld.getNama_penyebab());
@@ -400,6 +460,27 @@ public class FormRules extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnSelesaiActionPerformed
+
+    private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
+        // TODO add your handling code here:
+        
+        if(evt.getKeyChar()== KeyEvent.VK_DELETE){
+            int ok = JOptionPane.showConfirmDialog(null, "Apa Anda Ingin Menghapus ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            
+            if(ok==0){
+                rd.Delete(rd.getIdRules());
+                rd.setIdRules("");
+            }
+        }
+        
+    }//GEN-LAST:event_jTable2KeyPressed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        
+        int row = jTable2.getSelectedRow();
+        rd.setIdRules(jTable2.getValueAt(row, 0).toString());
+    }//GEN-LAST:event_jTable2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -446,9 +527,13 @@ public class FormRules extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea txtNama;
     // End of variables declaration//GEN-END:variables
 }

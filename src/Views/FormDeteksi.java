@@ -59,7 +59,7 @@ public class FormDeteksi extends javax.swing.JFrame {
             st = con.connect().createStatement();
             res = st.executeQuery("SELECT *FROM tb_solusi WHERE Id = '"+Id+"'");
             while(res.next()){
-                tb_pelanggan.setSolusi(res.getString("solusi"));
+                tb_pelanggan.setSolusi(res.getString("solusi"));                
             }
         }catch(SQLException ex){
             
@@ -73,7 +73,7 @@ public class FormDeteksi extends javax.swing.JFrame {
         btnHapus.setEnabled(false);
         btnLanjutkan.setEnabled(true);
         btnCancel.setEnabled(false);
-        tb_pelanggan.setSolusi("Tidak Ada");
+        btnCetak.setEnabled(false);
         tb_pelanggan.setIdriwayat("");
     }
 
@@ -83,8 +83,8 @@ public class FormDeteksi extends javax.swing.JFrame {
             st = con.connect().createStatement();
             res = st.executeQuery("SELECT *FROM tb_rules WHERE ket = '" + hasil + "'");
             if (res.next()) {
-                frd.setKodePenyebab(res.getString("kode_penyebab"));
                 txtKesimpulan.setText(res.getString("nama_penyebab"));
+                frd.setKodePenyebab(res.getString("kode_penyebab"));
             } else {
                 txtKesimpulan.setText("Gejala Yang di Pilih Tidak Jelas, Silahkan Pilih Kembali !!");
             }
@@ -116,6 +116,7 @@ public class FormDeteksi extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtKesimpulan = new javax.swing.JTextArea();
         btnCetak = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -209,6 +210,14 @@ public class FormDeteksi extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("ULANG");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -216,11 +225,14 @@ public class FormDeteksi extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnCetak, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnCetak, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -231,7 +243,9 @@ public class FormDeteksi extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCetak)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCetak)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -365,6 +379,7 @@ public class FormDeteksi extends javax.swing.JFrame {
         CheckHasil();
         btnLanjutkan.setEnabled(false);
         btnCancel.setEnabled(false);
+        btnCetak.setEnabled(true);
     }//GEN-LAST:event_btnLanjutkanActionPerformed
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
@@ -377,8 +392,8 @@ public class FormDeteksi extends javax.swing.JFrame {
             tb_pelanggan.setKerusakan(txtKesimpulan.getText().trim());
             CheckSolusi(frd.getKodePenyebab());
             new FormDataPelanggan().show();
-            Refresh();
             dispose();
+            Refresh();
         }
     }//GEN-LAST:event_btnCetakActionPerformed
 
@@ -402,6 +417,16 @@ public class FormDeteksi extends javax.swing.JFrame {
         // TODO add your handling code here:
         Refresh();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dtd.SaveRiwayat(frd.getIdRiwayat(), tblPilihan.getRowCount(),frd.getKodePenyebab());
+        frd.setIdRiwayat(frd.IdRiwayat());
+        rs2 = frd.ShowDetail(frd.getIdRiwayat());
+        tbl.SetTabel(tblPilihan, rs2, namaKolom2, jmlKolom2, lebar2);
+        txtKesimpulan.setText("");
+        listKode.clear();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,6 +469,7 @@ public class FormDeteksi extends javax.swing.JFrame {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnLanjutkan;
     private javax.swing.JButton btnPilih;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

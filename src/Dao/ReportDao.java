@@ -23,7 +23,7 @@ public class ReportDao {
 
     private Koneksi con;
 
-    public void CetakLaporan(String idriwayat, String solusi, String idmeter, String nama, String kerusakan) {
+    public void CetakLaporan(String idriwayat, String solusi, String idmeter, String nama, String kerusakan, String alamat, String Id, String petugas, String rayon) {
         
         con = new Koneksi();
 
@@ -35,6 +35,10 @@ public class ReportDao {
             parameter.put("idmeter", idmeter );
             parameter.put("nama", nama);
             parameter.put("kerusakan", kerusakan);
+            parameter.put("idpetugas", Id);
+            parameter.put("namapetugas", petugas);
+            parameter.put("rayon", rayon);
+            parameter.put("alamat", alamat);
             JasperReport jp = (JasperReport) JRLoader.loadObject(file);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jp, parameter, con.connect());
             JasperViewer.viewReport(jasperPrint, false);
