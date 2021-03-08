@@ -44,6 +44,7 @@ public class FormUtama extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         menuRules = new javax.swing.JMenuItem();
+        menuPengguna = new javax.swing.JMenuItem();
         menu_deteksi = new javax.swing.JMenu();
         menu_exit = new javax.swing.JMenu();
         menu_logout = new javax.swing.JMenu();
@@ -110,6 +111,14 @@ public class FormUtama extends javax.swing.JFrame {
             }
         });
         menu_utama.add(menuRules);
+
+        menuPengguna.setText("PENGGUNA");
+        menuPengguna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPenggunaActionPerformed(evt);
+            }
+        });
+        menu_utama.add(menuPengguna);
 
         jMenuBar1.add(menu_utama);
 
@@ -189,14 +198,24 @@ public class FormUtama extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         String username = tb_admin.getUsername();
+        String role = tb_admin.getRole();
 
-        if (username != null) {
+        if (username != null && role.equals("ADMIN")) {
             menuRules.setVisible(true);
             menu_login.setVisible(false);
             menu_utama.setVisible(true);
             menu_deteksi.setVisible(false);
             menu_logout.setVisible(true);
             menu_exit.setVisible(false);
+            menuPengguna.setVisible(false);
+        }else if (username != null && role.equals("SUPERADMIN")) {
+            menuRules.setVisible(true);
+            menu_login.setVisible(false);
+            menu_utama.setVisible(true);
+            menu_deteksi.setVisible(false);
+            menu_logout.setVisible(true);
+            menu_exit.setVisible(false);
+            menuPengguna.setVisible(true);
         }
     }//GEN-LAST:event_formWindowActivated
 
@@ -218,6 +237,11 @@ public class FormUtama extends javax.swing.JFrame {
         // TODO add your handling code here:
         new FormRules().show();
     }//GEN-LAST:event_menuRulesActionPerformed
+
+    private void menuPenggunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPenggunaActionPerformed
+        // TODO add your handling code here:
+        new FormAdmin().show();
+    }//GEN-LAST:event_menuPenggunaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,6 +284,7 @@ public class FormUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem menuPengguna;
     private javax.swing.JMenuItem menuRules;
     private javax.swing.JMenu menu_deteksi;
     private javax.swing.JMenu menu_exit;

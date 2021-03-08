@@ -204,6 +204,9 @@ public class FormLogin extends javax.swing.JFrame {
             rs = st.executeQuery("SELECT *FROM tb_admin WHERE username = '"+jTextField1.getText().trim()+"' AND password = '"+jPasswordField1.getText()+"'");
             if(rs.next()){
                 tb_admin.setUsername(jTextField1.getText().trim());
+                tb_admin.setRole(rs.getString("role"));
+//                tb_admin.setId(rs.getString("Id"));
+//                tb_admin.setNama(rs.getString("nama"));
                 JOptionPane.showMessageDialog(null, "WELCOME ADMIN " + tb_admin.getUsername());
                 dispose();
             }

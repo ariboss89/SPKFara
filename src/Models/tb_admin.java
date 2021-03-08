@@ -13,7 +13,34 @@ package Models;
 public class tb_admin {
     public static String username;
     public static String password;
+    public static String Id;
+    public static String nama;
+    public static String role;
 
+    public static String getRole() {
+        return role;
+    }
+
+    public static void setRole(String role) {
+        tb_admin.role = role;
+    }
+
+    public static String getId() {
+        return Id;
+    }
+
+    public static void setId(String Id) {
+        tb_admin.Id = Id;
+    }
+
+    public static String getNama() {
+        return nama;
+    }
+
+    public static void setNama(String nama) {
+        tb_admin.nama = nama;
+    }
+    
     public static String getUsername() {
         return username;
     }

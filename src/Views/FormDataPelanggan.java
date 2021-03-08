@@ -5,9 +5,12 @@
  */
 package Views;
 
+import Controller.Koneksi;
 import Dao.ReportDao;
-import Models.tb_formula;
 import Models.tb_pelanggan;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,14 +23,30 @@ public class FormDataPelanggan extends javax.swing.JFrame {
      * Creates new form FormDataPelanggan
      */
     ReportDao rpt = new ReportDao();
+    Koneksi con;
+    Statement st;
+    ResultSet rs;
 
     public FormDataPelanggan() {
         initComponents();
         txtIdRiwayat.setText(tb_pelanggan.getIdriwayat());
         setLocationRelativeTo(this);
         txtIdmeter.requestFocus();
+        ShowId();
     }
 
+    private void ShowId(){
+        con = new Koneksi();
+        try{
+            st = con.connect().createStatement();
+            rs = st.executeQuery("SELECT *FROM tb_admin");
+            while(rs.next()){
+                jComboBox1.addItem(rs.getString("Id"));
+            }
+        }catch(SQLException ex){
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,12 +68,12 @@ public class FormDataPelanggan extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        txtIdPetugas = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtNamaPetugas = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtRayon = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -95,12 +114,6 @@ public class FormDataPelanggan extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 51, 255));
         jLabel6.setText("ID PETUGAS");
 
-        txtIdPetugas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdPetugasActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 51, 255));
         jLabel7.setText("NAMA PETUGAS");
@@ -129,6 +142,14 @@ public class FormDataPelanggan extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PILIH" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -136,16 +157,16 @@ public class FormDataPelanggan extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtIdPetugas)
                     .addComponent(txtNamaPetugas)
                     .addComponent(txtRayon)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
                         .addGap(0, 239, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -154,8 +175,8 @@ public class FormDataPelanggan extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtIdPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNamaPetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +254,7 @@ public class FormDataPelanggan extends javax.swing.JFrame {
         String nama = txtNamaPelanggan.getText().trim();
         String kerusakan = tb_pelanggan.getKerusakan();
         String solusi = tb_pelanggan.getSolusi();
-        String idPetugas = txtIdPetugas.getText().trim();
+        String idPetugas = jComboBox1.getSelectedItem().toString().trim();
         String namaPetugas = txtNamaPetugas.getText().trim();
         String rayon = txtRayon.getText().trim();
         String alamat = jTextArea1.getText().trim();
@@ -255,10 +276,6 @@ public class FormDataPelanggan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdmeterActionPerformed
 
-    private void txtIdPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPetugasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdPetugasActionPerformed
-
     private void txtNamaPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaPetugasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNamaPetugasActionPerformed
@@ -266,6 +283,20 @@ public class FormDataPelanggan extends javax.swing.JFrame {
     private void txtRayonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRayonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRayonActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        con = new Koneksi();
+        try{
+            st = con.connect().createStatement();
+            rs = st.executeQuery("SELECT *FROM tb_admin WHERE Id = '"+jComboBox1.getSelectedItem().toString().trim()+"'");
+            while(rs.next()){
+                txtNamaPetugas.setText(rs.getString("nama"));
+            }
+        }catch(SQLException ex){
+            
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -304,6 +335,7 @@ public class FormDataPelanggan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -315,7 +347,6 @@ public class FormDataPelanggan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField txtIdPetugas;
     private javax.swing.JTextField txtIdRiwayat;
     private javax.swing.JTextField txtIdmeter;
     private javax.swing.JTextField txtNamaPelanggan;

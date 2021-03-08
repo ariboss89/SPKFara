@@ -8,6 +8,10 @@
 	<parameter name="idmeter" class="java.lang.String"/>
 	<parameter name="nama" class="java.lang.String"/>
 	<parameter name="kerusakan" class="java.lang.String"/>
+	<parameter name="idpetugas" class="java.lang.String"/>
+	<parameter name="namapetugas" class="java.lang.String"/>
+	<parameter name="rayon" class="java.lang.String"/>
+	<parameter name="alamat" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select *from tb_deteksi WHERE id_riwayat = $P{idRiwayat} ORDER BY kode ASC]]>
 	</queryString>
@@ -27,9 +31,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="175" splitType="Stretch">
+		<band height="267" splitType="Stretch">
 			<rectangle>
-				<reportElement x="18" y="0" width="524" height="175" uuid="44d9143e-97c4-4a1b-b639-6d18afc64bd1"/>
+				<reportElement x="18" y="0" width="524" height="248" uuid="44d9143e-97c4-4a1b-b639-6d18afc64bd1"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="18" y="18" width="524" height="61" uuid="f8f26f1e-d99e-4be5-b2ec-f1b30817ed94"/>
@@ -46,25 +50,25 @@
 				<textFieldExpression><![CDATA[$P{idRiwayat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="304" y="89" width="100" height="20" uuid="6c6272d3-201e-4be3-a587-f5c5e22c7486"/>
+				<reportElement x="284" y="89" width="120" height="20" uuid="6c6272d3-201e-4be3-a587-f5c5e22c7486"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ID RIWAYAT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="304" y="109" width="100" height="20" uuid="22777dfa-51bd-46c1-a682-3fc7f9868019"/>
+				<reportElement x="284" y="109" width="120" height="20" uuid="22777dfa-51bd-46c1-a682-3fc7f9868019"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ID METER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="304" y="129" width="100" height="20" uuid="060df57c-06f0-4b8d-8be6-2f3e09914e80"/>
+				<reportElement x="284" y="129" width="120" height="20" uuid="060df57c-06f0-4b8d-8be6-2f3e09914e80"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[NAMA]]></text>
+				<text><![CDATA[NAMA PELANGGAN]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="404" y="109" width="122" height="20" uuid="2b11e08f-9d93-410d-8b97-c97e9454acb4"/>
@@ -79,6 +83,62 @@
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="284" y="149" width="120" height="20" uuid="cd13dd62-c403-4110-8c17-5d8574393307"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALAMAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="89" width="87" height="20" uuid="fe5fb482-be08-4c99-ba99-06b03d1be344"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID-PETUGAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="109" width="87" height="20" uuid="0d894362-47a5-4c31-ac63-558c77b76bb6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="129" width="87" height="20" uuid="a78b1dce-07ab-4b4e-88a0-fc70e1ae6f38"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAYON]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="404" y="149" width="122" height="82" uuid="10400c38-f925-4cb7-83ea-d4078506a673"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{alamat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="89" width="147" height="20" uuid="df450200-2bca-4146-a8bb-307cbfa3410b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{idpetugas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="109" width="147" height="20" uuid="6aa51b75-e37c-4478-aadf-7f3bd8aef3ca"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namapetugas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="129" width="147" height="102" uuid="7ba6cf3c-3dc6-4726-8b90-2d42b96514ea"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{rayon}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
